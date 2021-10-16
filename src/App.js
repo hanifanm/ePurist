@@ -133,7 +133,7 @@ function Form() {
   return (
     <div className="mb-5">
       <form>
-        <h3 className="mb-4">Please insert your couchdb creadentials</h3>
+        <h3 className="mb-4">Please insert your couchdb credentials</h3>
         <Input
           id="host"
           label="Database URL & Credential"
@@ -300,7 +300,7 @@ function App() {
       <div className="p-5 shadow-sm rounded bg-white h-100">
         <div className="pt-2 sticky-top bg-white">
           <h1>ePurist</h1>
-          <span>Couchdb healthchecker</span>
+          <span>CouchDB healthchecker</span>
           <hr className="mb-5" />
         </div>
         <AnalyzerProvider>
