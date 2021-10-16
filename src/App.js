@@ -54,6 +54,7 @@ function useAnalyzer() {
 
   async function analyze({ dbUrl, dbName, batchLength }) {
     setStatus(FETCH_STATUS.LOADING);
+    setData([]);
     try {
       const newData = await fetchData(dbName, dbUrl, batchLength, setData);
       const newAnalysis = await doAnalyze(newData);
