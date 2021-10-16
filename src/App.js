@@ -9,6 +9,13 @@ const FETCH_STATUS = {
   FAILED: "FAILED",
 };
 
+const DATA_TYPES_NULL_OR_UNDEFINED = DATA_TYPES.filter(
+  ({ key }) => key === TYPE_KEY.NULL || key === TYPE_KEY.UNDEFINED
+);
+const DATA_TYPES_NON_NULL_NON_UNDEFINED = DATA_TYPES.filter(
+  ({ key }) => key !== TYPE_KEY.NULL && key !== TYPE_KEY.UNDEFINED
+);
+
 async function fetchData(dbName, dbUrl, batchLength, updateData) {
   const db = new CouchDBWrapper(dbName, dbUrl);
   let allData = [];
@@ -187,8 +194,8 @@ function AnalysisReportLoading({ dataLength }) {
 
 function AnalysisReportRow({ variableName, data, level = 0 }) {
   const dataTypeKeys = DATA_TYPES.map(({ key }) => key);
-  const dataTypeKeysNonNullNonUndefined = dataTypeKeys.filter(
-    (key) => key !== TYPE_KEY.NULL && key !== TYPE_KEY.UNDEFINED
+  const dataTypeKeysNonNullNonUndefined = DATA_TYPES_NON_NULL_NON_UNDEFINED.map(
+    ({ key }) => key
   );
   const otherKeys = Object.keys(data)
     .filter((key) => dataTypeKeys.indexOf(key) < 0)
@@ -214,6 +221,12 @@ function AnalysisReportRow({ variableName, data, level = 0 }) {
     ? "table-warning"
     : "";
 
+  const rowNote = isMultitype
+    ? "Has several datatypes"
+    : isHasNullOrUndefined
+    ? "Contains null or undefined"
+    : "";
+
   return (
     <>
       <tr className={rowStyle}>
@@ -221,9 +234,30 @@ function AnalysisReportRow({ variableName, data, level = 0 }) {
           {spaces}
           <span>{variableName}</span>
         </td>
-        {DATA_TYPES.map((dataType) => (
-          <td key={dataType.key}>{data[dataType.key] || 0}</td>
+        {DATA_TYPES_NULL_OR_UNDEFINED.map((dataType, index) => (
+          <td
+            key={dataType.key}
+            className="text-center"
+            style={{ borderLeft: index === 0 ? "2px solid black" : 0 }}
+          >
+            {data[dataType.key] || 0}
+          </td>
         ))}
+        {DATA_TYPES_NON_NULL_NON_UNDEFINED.map((dataType, index) => (
+          <td
+            key={dataType.key}
+            className="text-center"
+            style={{ borderLeft: index === 0 ? "2px solid black" : 0 }}
+          >
+            {data[dataType.key] || 0}
+          </td>
+        ))}
+        <td
+          className="text-center text-small"
+          style={{ borderLeft: "2px solid black" }}
+        >
+          <small>{rowNote}</small>
+        </td>
       </tr>
       {otherKeys.map((otherKey) => (
         <AnalysisReportRow
@@ -239,15 +273,37 @@ function AnalysisReportRow({ variableName, data, level = 0 }) {
 
 function AnalysisReport({ analysisResult }) {
   return (
-    <table className="table table-hover">
+    <table className="table table-hover table-responsive">
       <thead>
         <tr>
           <th scope="col">Key</th>
-          {DATA_TYPES.map((dataType) => (
-            <th key={dataType.key} scope="col">
+          {DATA_TYPES_NULL_OR_UNDEFINED.map((dataType, index) => (
+            <th
+              key={dataType.key}
+              scope="col"
+              className="text-center"
+              style={{ borderLeft: index === 0 ? "2px solid black" : 0 }}
+            >
               {dataType.name}
             </th>
           ))}
+          {DATA_TYPES_NON_NULL_NON_UNDEFINED.map((dataType, index) => (
+            <th
+              key={dataType.key}
+              scope="col"
+              className="text-center"
+              style={{ borderLeft: index === 0 ? "2px solid black" : 0 }}
+            >
+              {dataType.name}
+            </th>
+          ))}
+          <th
+            scope="col"
+            className="text-center"
+            style={{ borderLeft: "2px solid black" }}
+          >
+            Note
+          </th>
         </tr>
       </thead>
       <tbody>
