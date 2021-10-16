@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/ePurist/static/css/main.392e40cc.chunk.css",
-    "main.js": "/ePurist/static/js/main.e89243c0.chunk.js",
-    "main.js.map": "/ePurist/static/js/main.e89243c0.chunk.js.map",
+    "main.css": "/ePurist/static/css/main.4c44304f.chunk.css",
+    "main.js": "/ePurist/static/js/main.9d863818.chunk.js",
+    "main.js.map": "/ePurist/static/js/main.9d863818.chunk.js.map",
     "runtime-main.js": "/ePurist/static/js/runtime-main.5274fa45.js",
     "runtime-main.js.map": "/ePurist/static/js/runtime-main.5274fa45.js.map",
     "static/css/2.e6c1e8c5.chunk.css": "/ePurist/static/css/2.e6c1e8c5.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.fa0d21f0.chunk.js.map": "/ePurist/static/js/3.fa0d21f0.chunk.js.map",
     "index.html": "/ePurist/index.html",
     "static/css/2.e6c1e8c5.chunk.css.map": "/ePurist/static/css/2.e6c1e8c5.chunk.css.map",
-    "static/css/main.392e40cc.chunk.css.map": "/ePurist/static/css/main.392e40cc.chunk.css.map",
+    "static/css/main.4c44304f.chunk.css.map": "/ePurist/static/css/main.4c44304f.chunk.css.map",
     "static/js/2.31ff2a24.chunk.js.LICENSE.txt": "/ePurist/static/js/2.31ff2a24.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5274fa45.js",
     "static/css/2.e6c1e8c5.chunk.css",
     "static/js/2.31ff2a24.chunk.js",
-    "static/css/main.392e40cc.chunk.css",
-    "static/js/main.e89243c0.chunk.js"
+    "static/css/main.4c44304f.chunk.css",
+    "static/js/main.9d863818.chunk.js"
   ]
 }
