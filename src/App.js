@@ -271,53 +271,56 @@ function AnalysisReportRow({ variableName, data, level = 0 }) {
   );
 }
 
-function AnalysisReport({ analysisResult }) {
+function AnalysisReport({ analysisResult, dataLength }) {
   return (
-    <table className="table table-hover table-responsive">
-      <thead>
-        <tr>
-          <th scope="col">Key</th>
-          {DATA_TYPES_NULL_OR_UNDEFINED.map((dataType, index) => (
+    <>
+      <div>{dataLength} row[s] analyzed</div>
+      <table className="table table-hover table-responsive">
+        <thead>
+          <tr>
+            <th scope="col">Key</th>
+            {DATA_TYPES_NULL_OR_UNDEFINED.map((dataType, index) => (
+              <th
+                key={dataType.key}
+                scope="col"
+                className="text-center"
+                style={{ borderLeft: index === 0 ? "2px solid black" : 0 }}
+              >
+                {dataType.name}
+              </th>
+            ))}
+            {DATA_TYPES_NON_NULL_NON_UNDEFINED.map((dataType, index) => (
+              <th
+                key={dataType.key}
+                scope="col"
+                className="text-center"
+                style={{ borderLeft: index === 0 ? "2px solid black" : 0 }}
+              >
+                {dataType.name}
+              </th>
+            ))}
             <th
-              key={dataType.key}
               scope="col"
               className="text-center"
-              style={{ borderLeft: index === 0 ? "2px solid black" : 0 }}
+              style={{ borderLeft: "2px solid black" }}
             >
-              {dataType.name}
+              Note
             </th>
-          ))}
-          {DATA_TYPES_NON_NULL_NON_UNDEFINED.map((dataType, index) => (
-            <th
-              key={dataType.key}
-              scope="col"
-              className="text-center"
-              style={{ borderLeft: index === 0 ? "2px solid black" : 0 }}
-            >
-              {dataType.name}
-            </th>
-          ))}
-          <th
-            scope="col"
-            className="text-center"
-            style={{ borderLeft: "2px solid black" }}
-          >
-            Note
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.keys(analysisResult)
-          .sort()
-          .map((key) => (
-            <AnalysisReportRow
-              key={key}
-              variableName={key}
-              data={analysisResult[key]}
-            />
-          ))}
-      </tbody>
-    </table>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(analysisResult)
+            .sort()
+            .map((key) => (
+              <AnalysisReportRow
+                key={key}
+                variableName={key}
+                data={analysisResult[key]}
+              />
+            ))}
+        </tbody>
+      </table>
+    </>
   );
 }
 
@@ -327,16 +330,21 @@ function AnalysisReportContainer() {
   return (
     <div className="mb-5">
       <div>
-        <h3 className="mb-4">Analysis Report</h3>
+        <h3 className="mb-4">
+          {status === FETCH_STATUS.LOADING
+            ? "Analyzing Report"
+            : "Analysis Report"}
+        </h3>
         {status === FETCH_STATUS.LOADING && (
           <div>
             <AnalysisReportLoading dataLength={data.length} />
           </div>
         )}
         {status === FETCH_STATUS.SUCCESS && (
-          <pre>
-            <AnalysisReport analysisResult={analysisResult} />
-          </pre>
+          <AnalysisReport
+            analysisResult={analysisResult}
+            dataLength={data.length}
+          />
         )}
         {status === FETCH_STATUS.FAILED && (
           <div className="alert alert-danger" role="alert">
