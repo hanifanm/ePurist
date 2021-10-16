@@ -202,7 +202,7 @@ function AnalysisReportRow({ variableName, data, level = 0 }) {
     .sort();
 
   const spaces = [...Array(level)].map((_, index) => (
-    <span key={index}>{"  "}</span>
+    <span key={index}>&nbsp; &nbsp; &nbsp;</span>
   ));
 
   // Check if data has multiple types other than null and undefined
