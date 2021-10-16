@@ -1,4 +1,4 @@
-const TYPE_KEY = {
+export const TYPE_KEY = {
   NULL: "___null",
   UNDEFINED: "___undefined",
   ARRAY: "___array",
@@ -8,7 +8,7 @@ const TYPE_KEY = {
   OBJECT: "___object",
 };
 
-const DATA_TYPES = [
+export const DATA_TYPES = [
   { name: "Null", key: TYPE_KEY.NULL },
   { name: "Undefined", key: TYPE_KEY.UNDEFINED },
   { name: "Array", key: TYPE_KEY.ARRAY },
@@ -30,7 +30,7 @@ function getType(variable) {
   }
 }
 
-function doAnalyze(list) {
+export function doAnalyze(list) {
   const finalMap = {};
 
   function getOrCreate(keys) {
@@ -60,6 +60,7 @@ function doAnalyze(list) {
 
   function analyze(keys, finalMap, obj) {
     for (let key of Object.keys(finalMap)) {
+      if (Object.values(TYPE_KEY).indexOf(key) >= 0) continue;
       const rec = getOrCreate([...keys, key]);
       const type = getType(obj[key]);
       if (rec[type]) rec[type]++;
@@ -78,6 +79,7 @@ function doAnalyze(list) {
   for (let obj of list) {
     updateMap([], obj);
   }
+  console.log(finalMap);
 
   for (let obj of list) {
     analyze([], finalMap, obj);
@@ -85,9 +87,3 @@ function doAnalyze(list) {
 
   return finalMap;
 }
-
-module.exports = {
-  doAnalyze,
-  TYPE_KEY,
-  DATA_TYPES,
-};
