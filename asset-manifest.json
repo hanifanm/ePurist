@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ePurist/static/css/main.4c44304f.chunk.css",
-    "main.js": "/ePurist/static/js/main.7dca6f27.chunk.js",
-    "main.js.map": "/ePurist/static/js/main.7dca6f27.chunk.js.map",
+    "main.js": "/ePurist/static/js/main.5cf5bf71.chunk.js",
+    "main.js.map": "/ePurist/static/js/main.5cf5bf71.chunk.js.map",
     "runtime-main.js": "/ePurist/static/js/runtime-main.5274fa45.js",
     "runtime-main.js.map": "/ePurist/static/js/runtime-main.5274fa45.js.map",
     "static/css/2.e6c1e8c5.chunk.css": "/ePurist/static/css/2.e6c1e8c5.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.e6c1e8c5.chunk.css",
     "static/js/2.31ff2a24.chunk.js",
     "static/css/main.4c44304f.chunk.css",
-    "static/js/main.7dca6f27.chunk.js"
+    "static/js/main.5cf5bf71.chunk.js"
   ]
 }
